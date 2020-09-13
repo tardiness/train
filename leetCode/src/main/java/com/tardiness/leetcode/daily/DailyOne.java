@@ -1,5 +1,8 @@
 package com.tardiness.leetcode.daily;
 
+import com.sun.jmx.remote.internal.ArrayQueue;
+import com.tardiness.leetcode.list.ListNode;
+
 import java.util.*;
 
 /**
@@ -8,6 +11,12 @@ import java.util.*;
  * @data: 2020/9/9 11:34
  * @Description:
  */
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+}
 public class DailyOne {
 
     public static void main(String[] args) {
@@ -17,7 +26,18 @@ public class DailyOne {
 
 //        dailyOne.combinationSum2(a,8);
 
-        dailyOne.combinationSum3(3,9);
+//        dailyOne.combinationSum3(3,9);
+
+        //
+        TreeNode node1 = new TreeNode(20);
+        node1.left = new TreeNode(15);
+        node1.right = new TreeNode(7);
+
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = node1;
+        dailyOne.averageOfLevels(root);
+
     }
 
 
@@ -156,4 +176,49 @@ public class DailyOne {
         }
     }
 
+    /**
+     * 二叉树的层平均值 #637
+     * @param root
+     * @return
+     */
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> doubles = new ArrayList<>();
+        bfs(root,doubles);
+        return doubles;
+    }
+
+    private void bfs(TreeNode root, List<Double> doubles) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            double sum = 0;
+            int size = queue.size();
+            for (int i=0;i<size;i++) {
+                TreeNode treeNode = queue.poll();
+                sum += treeNode.val;
+                if (treeNode.left != null) {
+                    queue.offer(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    queue.offer(treeNode.right);
+                }
+            }
+            doubles.add(sum/size);
+        }
+    }
+
+
+    /**
+     * 单词搜索 #79
+     * @param board
+     * @param word
+     * @return
+     */
+    public boolean exist(char[][] board, String word) {
+
+        return false;
+    }
 }
