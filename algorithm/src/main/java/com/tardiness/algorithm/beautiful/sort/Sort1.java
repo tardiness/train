@@ -1,4 +1,4 @@
-package com.tardiness.leetcode.sort;
+package com.tardiness.algorithm.beautiful.sort;
 
 /**
  * @author: shishaopeng
@@ -13,8 +13,8 @@ public class Sort1 {
         int[] a = new int[]{4,5,6,3,2,1};
         Sort1 sort1 = new Sort1();
 //        sort1.bubbleSort(a);
-        sort1.insertionSort(a);
-//        sort1.selectionSort(a);
+//        sort1.insertionSort(a);
+        sort1.selectionSort(a);
         for (int i:a){
             System.out.println(i);
         }
@@ -25,8 +25,9 @@ public class Sort1 {
         if (len <=1) {
             return;
         }
-        boolean flag = false;
+
         for (int i=0;i<len;i++) {
+            boolean flag = false;
             for (int j=0;j<len-i-1;j++) {
                 if (a[j] > a[j+1]) {
                     int temp = a[j];
@@ -51,7 +52,7 @@ public class Sort1 {
             int j = i-1;
             int value = a[i];
             for (;j>=0;j--) {
-                if (value < a[j]) {
+                if (a[j] > value) {
                     a[j+1] = a[j];
                 } else {
                     break;
